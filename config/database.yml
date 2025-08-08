@@ -21,8 +21,21 @@ default: &default
 
 
 development:
-  <<: *default
-  database: railway_template_development
+  primary: &primary_development
+    <<: *default
+    database: railway_template_development
+  cache:
+    <<: *primary_development
+    database: railway_template_development_cache
+    migrations_paths: db/cache_migrate
+  queue:
+    <<: *primary_development
+    database: railway_template_development_queue
+    migrations_paths: db/queue_migrate
+  cable:
+    <<: *primary_development
+    database: railway_template_development_cable
+    migrations_paths: db/cable_migrate
 
   # The specified database role being used to connect to PostgreSQL.
   # To create additional roles in PostgreSQL see `$ createuser --help`.
@@ -81,9 +94,7 @@ test:
 production:
   primary: &primary_production
     <<: *default
-    database: railway_template_production
-    username: railway_template
-    password: <%= ENV["RAILWAY_TEMPLATE_DATABASE_PASSWORD"] %>
+    url: <%= ENV["PRIMARY_DATABASE_URL"] %>
   cache:
     <<: *primary_production
     database: railway_template_production_cache
