@@ -95,6 +95,7 @@ Make sure to double check that these files match the template:
 * `puma.rb` - sets up solid queue in development
 * `routes.rb` - adds /jobs route
 * `Dockerfile` - replaces default `CMD ["./bin/thrust", "./bin/rails", "server"]` with `CMD bin/rails server -b 0.0.0.0 -p ${PORT}` to work with Railway
+* `docker-entrepoint` - sets up the databases for solid stack
 * `Gemfile` - adds Mission Control, Letter Opener, Devise, and Postmark gems
 
 You can focus on just production changes and ignore the development changes, but I recommend setting it up like the template so it's easy to catch issues before pushing to production
